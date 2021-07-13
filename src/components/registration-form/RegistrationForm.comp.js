@@ -90,7 +90,7 @@ const RegistrationForm = () => {
     <Container>
       <Row>
         <Col>
-          <h1 className="text-info">User Registration</h1>
+          <h1 className="text-info">Creér un compte</h1>
         </Col>
       </Row>
       <hr />
@@ -108,7 +108,7 @@ const RegistrationForm = () => {
         <Col>
           <Form onSubmit={handleOnSubmit}>
             <Form.Group>
-              <Form.Label>Full Name</Form.Label>
+              <Form.Label>Nom complet</Form.Label>
               <Form.Control
                 type="text"
                 name="name"
@@ -120,7 +120,7 @@ const RegistrationForm = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Phone</Form.Label>
+              <Form.Label>Telephone</Form.Label>
               <Form.Control
                 type="number"
                 name="phone"
@@ -132,7 +132,7 @@ const RegistrationForm = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
                 name="email"
@@ -144,7 +144,7 @@ const RegistrationForm = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Company name</Form.Label>
+              <Form.Label>Nom de l'entreprise</Form.Label>
               <Form.Control
                 type="text"
                 name="company"
@@ -156,7 +156,7 @@ const RegistrationForm = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Address</Form.Label>
+              <Form.Label>Addresse</Form.Label>
               <Form.Control
                 type="text"
                 name="address"
@@ -168,7 +168,7 @@ const RegistrationForm = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Mot de passe</Form.Label>
               <Form.Control
                 type="password"
                 name="password"
@@ -180,7 +180,7 @@ const RegistrationForm = () => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Confirm Password</Form.Label>
+              <Form.Label>Confirmer le mot de passe</Form.Label>
               <Form.Control
                 type="password"
                 name="confirmPass"
@@ -192,7 +192,7 @@ const RegistrationForm = () => {
             </Form.Group>
             <Form.Text>
               {!passwordError.confirmPass && (
-                <div className="text-danger mb-3">Password doesn't match!</div>
+                <div className="text-danger mb-3">MDP non synchronisé!</div>
               )}
             </Form.Text>
 

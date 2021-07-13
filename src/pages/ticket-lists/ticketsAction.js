@@ -14,19 +14,36 @@ import {
   closeTicketLoading,
   closeTicketSuccess,
   closeTicketFail,
+  searchTicketsByPriority,
 } from "./ticketSlice";
 
 import {
-  getAllTickets,
+  getLowPriorityTickets,
   getSingleTicket,
   updateReplyTicket,
   updateTicketStatusClosed,
+  getHighPriorityTickets,
+  getMedPriorityTickets,
 } from "../../api/ticketApi";
 export const fetchAllTickets = () => async (dispatch) => {
   dispatch(fetchTicketLoading());
 
   try {
-    const result = await getAllTickets();
+    const result = await getLowPriorityTickets();
+    dispatch(fetchTicketSuccess(result.data.result));
+    if (!result.data.result) {
+      dispatch(fetchTicketFail({ message: "error couldn't load" }));
+    }
+    console.log(result);
+  } catch (error) {
+    dispatch(fetchTicketFail(error.message));
+  }
+};
+export const fetchMedPrioTicketsTickets = () => async (dispatch) => {
+  dispatch(fetchTicketLoading());
+
+  try {
+    const result = await getMedPriorityTickets();
     dispatch(fetchTicketSuccess(result.data.result));
     if (!result.data.result) {
       dispatch(fetchTicketFail({ message: "error couldn't load" }));
@@ -37,8 +54,26 @@ export const fetchAllTickets = () => async (dispatch) => {
   }
 };
 
+export const fetchHighPrioTicketsTickets = () => async (dispatch) => {
+  dispatch(fetchTicketLoading());
+
+  try {
+    const result = await getHighPriorityTickets();
+    dispatch(fetchTicketSuccess(result.data.result));
+    if (!result.data.result) {
+      dispatch(fetchTicketFail({ message: "error couldn't load" }));
+    }
+    console.log(result);
+  } catch (error) {
+    dispatch(fetchTicketFail(error.message));
+  }
+};
 export const filterSearchTicket = (str) => (dispatch) => {
   dispatch(searchTickets(str));
+};
+
+export const filterSearchTicketsByPrioroty = (str) => (dispatch) => {
+  dispatch(searchTicketsByPriority(str));
 };
 
 export const fetchSingleTicket = (_id) => async (dispatch) => {

@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const rootUrl = "http://localhost:3001/v1/";
-const loginUrl = rootUrl + "user/login";
-const userProfileUrl = rootUrl + "user";
-const logoutUrl = rootUrl + "user/logout";
+const loginUrl = rootUrl + "admin/login";
+const userProfileUrl = rootUrl + "admin";
+const logoutUrl = rootUrl + "admin/logout";
 const newAccessJWT = rootUrl + "tokens";
 const userVerificationUrl = userProfileUrl + "/verify";
 

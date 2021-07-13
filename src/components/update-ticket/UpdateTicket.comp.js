@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Form, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { replyOnTicket } from "../../pages/ticket-lists/ticketsAction";
+
+import { getUserProfile } from "../../pages/dashboard/userAction";
 export const UpdateTicket = ({ _id }) => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUserProfile());
+  }, [dispatch]);
   const {
     user: { name },
   } = useSelector((state) => state.user);
@@ -29,7 +34,7 @@ export const UpdateTicket = ({ _id }) => {
     <Form onSubmit={handleOnSubmit}>
       <Form.Label>Reply</Form.Label>
       <Form.Text>
-        <h4>Veuillez repondre à notre support ici</h4>
+        <h4>Veuillez repondre à notre client ici</h4>
       </Form.Text>
       <Form.Control
         value={message}

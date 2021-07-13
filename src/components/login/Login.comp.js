@@ -22,8 +22,8 @@ export const LoginForm = ({ frmSwitcher }) => {
   useEffect(() => {
     sessionStorage.getItem("accessJWT") && history.push("/dashboard");
   }, [history]);
-  const [email, setEmail] = useState("okop@p.com");
-  const [password, setPassword] = useState("password12");
+  const [email, setEmail] = useState("d.jaidi@aui.ma");
+  const [password, setPassword] = useState("admin123");
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;

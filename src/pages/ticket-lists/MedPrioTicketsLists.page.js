@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchAllTickets } from "./ticketsAction";
+import { fetchMedPrioTicketsTickets } from "./ticketsAction";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { PageBreadcrumb } from "../../components/breadcrumb/Breadcrumb.comp";
 import { SearchForm } from "../../components/search-form/SearchForm.comp";
 import { TicketTable } from "../../components/Ticket-table/TicketTable.comp";
 import tickets from "../../assets/data/dummy-tickets.json";
 import { Link } from "react-router-dom";
-export const TicketLists = () => {
+export const MPTicketLists = () => {
   const dispatch = useDispatch();
   const [str, setStr] = useState("");
 
   useEffect(() => {
-    dispatch(fetchAllTickets());
+    dispatch(fetchMedPrioTicketsTickets());
   }, [str, dispatch]);
 
   return (

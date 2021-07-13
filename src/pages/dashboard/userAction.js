@@ -7,8 +7,8 @@ export const getUserProfile = () => async (dispatch) => {
 
     const result = await fetchUser();
 
-    if (result.user && result.user._id)
-      return dispatch(getUserSuccess(result.user));
+    if (result.admin && result.admin._id)
+      return dispatch(getUserSuccess(result.admin));
 
     dispatch(getUserFail("User is not found"));
   } catch (error) {

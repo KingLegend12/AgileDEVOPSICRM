@@ -28,7 +28,7 @@ export const Header = () => {
             "0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px orangered, 0 0 80px orangered, 0 0 90px orangered, 0 0 100px orangered, 0 0 150px orangered",
         }}
       >
-        Bienvenue {user.name}
+        Bienvenue Admin {user.name}
       </h3>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -40,10 +40,24 @@ export const Header = () => {
               </Button>
             </Nav.Link>
           </LinkContainer>
-          <LinkContainer to="/tickets">
+          <LinkContainer to="/P-Btickets">
             <Nav.Link>
               <Button variant="outline-light" size="lg" className="HeaderBTN">
-                Les tickets
+                Les tickets P_B
+              </Button>
+            </Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/P-Mtickets">
+            <Nav.Link>
+              <Button variant="outline-light" size="lg" className="HeaderBTN">
+                Les tickets P_M
+              </Button>
+            </Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/P-Etickets">
+            <Nav.Link>
+              <Button variant="outline-light" size="lg" className="HeaderBTN">
+                Les tickets P_E
               </Button>
             </Nav.Link>
           </LinkContainer>

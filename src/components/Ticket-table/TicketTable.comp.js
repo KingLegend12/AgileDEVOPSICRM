@@ -26,50 +26,52 @@ export const TicketTable = () => {
   if (error) return <h3>{error}</h3>;
 
   return (
-    <Container>
-      <Table className="table table-striped table-dark">
-        <thead>
-          <tr>
-            <th>Identifiant du ticket</th>
-            <th>Sujet</th>
-            <th>Status</th>
-            <th>Priorité</th>
-            <th>Date d'ouverture</th>
-          </tr>
-        </thead>
-        <tbody>
-          {searchTicketList.length ? (
-            searchTicketList.map((row) => (
-              <tr>
-                <td>{row._id}</td>
-                <td>
-                  <Link to={`/ticket/${row._id}`}>{row.subject}</Link>
-                </td>
-                <td>{row.status}</td>
-                <td
-                  style={{
-                    backgroundColor:
-                      row.priority == "Elevée"
-                        ? "red"
-                        : row.priority == "Moyenne"
-                        ? "orange"
-                        : "green",
-                  }}
-                >
-                  {row.priority}
-                </td>
-                <td>{row.openAt && new Date(row.openAt).toLocaleString()}</td>
-              </tr>
-            ))
-          ) : (
+    <>
+      <Container>
+        <Table className="table table-striped table-dark">
+          <thead>
             <tr>
-              <td colSpan="5" className="text-center">
-                Vous n'avez auncun ticket de reclamation en cours{""}
-              </td>
+              <th>Identifiant du ticket</th>
+              <th>Sujet</th>
+              <th>Status</th>
+              <th>Priorité</th>
+              <th>Date d'ouverture</th>
             </tr>
-          )}
-        </tbody>
-      </Table>
-    </Container>
+          </thead>
+          <tbody>
+            {searchTicketList.length ? (
+              searchTicketList.map((row) => (
+                <tr>
+                  <td>{row._id}</td>
+                  <td>
+                    <Link to={`/ticket/${row._id}`}>{row.subject}</Link>
+                  </td>
+                  <td>{row.status}</td>
+                  <td
+                    style={{
+                      backgroundColor:
+                        row.priority == "Elevée"
+                          ? "red"
+                          : row.priority == "Moyenne"
+                          ? "orange"
+                          : "green",
+                    }}
+                  >
+                    {row.priority}
+                  </td>
+                  <td>{row.openAt && new Date(row.openAt).toLocaleString()}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="text-center">
+                  Vous n'avez auncun ticket de reclamation en cours{""}
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </Container>
+    </>
   );
 };

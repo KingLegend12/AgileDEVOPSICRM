@@ -39,7 +39,7 @@ export const Dashboard = () => {
                 "border-radius": "2rem",
               }}
             >
-              Ajouter un Ticket
+              Ajouter un client
             </Button>
           </Link>
         </Col>

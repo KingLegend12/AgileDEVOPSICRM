@@ -7,6 +7,7 @@ import { UpdateTicket } from "../../components/update-ticket/UpdateTicket.comp";
 import { useParams } from "react-router-dom";
 import { fetchSingleTicket, closeTicket } from "../ticket-lists/ticketsAction";
 import { useDispatch, useSelector } from "react-redux";
+import { getUserProfile } from "../../pages/dashboard/userAction";
 import { Header } from "../../layout/partial/Header.comp";
 import { resetResponseMsg } from "../ticket-lists/ticketSlice";
 //const ticket = tickets[0];
@@ -23,15 +24,8 @@ export const Ticket = () => {
   } = useSelector((state) => state.tickets);
   const dispatch = useDispatch();
   useEffect(() => {
-    {
-      /* for (let i = 0; i < tickets.length; i++) {
-      if (tickets[i].id == tId) {
-        setTicket(tickets[i]);
-        continue; //break the loop
-      }
-    } */
-    }
     dispatch(fetchSingleTicket(tId));
+    dispatch(getUserProfile());
 
     return () => {
       (replyMsg || replyTicketError) && dispatch(resetResponseMsg());

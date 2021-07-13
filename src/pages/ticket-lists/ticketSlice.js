@@ -31,6 +31,12 @@ const ticketListSlice = createSlice({
         return row.subject.toLowerCase().includes(payload.toLowerCase());
       });
     },
+    searchTicketsByPriority: (state, { payload }) => {
+      state.searchTicketList = state.tickets.filter((row) => {
+        if (!payload) return row;
+        return row.priority.toLowerCase().includes(payload.toLowerCase());
+      });
+    },
     fetchSingleTicketLoading: (state) => {
       state.isLoading = true;
     },
@@ -92,6 +98,7 @@ export const {
   closeTicketSuccess,
   closeTicketFail,
   resetResponseMsg,
+  searchTicketsByPriority,
 } = actions;
 
 export default reducer;

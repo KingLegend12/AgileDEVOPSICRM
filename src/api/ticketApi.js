@@ -4,10 +4,10 @@ const rootUrl = "http://localhost:3001/v1/";
 const ticketUlr = rootUrl + "ticket/";
 const closeTicketUrl = rootUrl + "ticket/close-ticket/";
 
-export const getAllTickets = () => {
+export const getLowPriorityTickets = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await axios.get("http://localhost:3001/v1/ticket", {
+      const result = await axios.get("http://localhost:3001/v1/ticket/basse", {
         headers: {
           Authorization: sessionStorage.getItem("accessJWT"),
         },
@@ -19,11 +19,43 @@ export const getAllTickets = () => {
     }
   });
 };
+export const getMedPriorityTickets = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result = await axios.get(
+        "http://localhost:3001/v1/ticket/moyenne",
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+          },
+        }
+      );
 
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+export const getHighPriorityTickets = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result = await axios.get("http://localhost:3001/v1/ticket/elevee", {
+        headers: {
+          Authorization: sessionStorage.getItem("accessJWT"),
+        },
+      });
+
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 export const getSingleTicket = (_id) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await axios.get(ticketUlr + _id, {
+      const result = await axios.get(ticketUlr + "admin/" + _id, {
         headers: {
           Authorization: sessionStorage.getItem("accessJWT"),
         },
@@ -40,7 +72,7 @@ export const getSingleTicket = (_id) => {
 export const updateReplyTicket = (_id, msgObj) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await axios.put(ticketUlr + _id, msgObj, {
+      const result = await axios.put(ticketUlr + "admin/" + _id, msgObj, {
         headers: {
           Authorization: sessionStorage.getItem("accessJWT"),
         },
