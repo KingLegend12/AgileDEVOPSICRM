@@ -55,7 +55,11 @@ export const Ticket = () => {
             {replyTicketError && (
               <Alert variant="danger">{replyTicketError}</Alert>
             )}
-            {replyMsg && <Alert variant="success">{replyMsg}</Alert>}
+            {replyMsg && (
+              <Alert variant="success">
+                Ce ticket est en cours de Traitement
+              </Alert>
+            )}
           </Col>
         </Row>
         <Row>
@@ -74,9 +78,9 @@ export const Ticket = () => {
             <Button
               variant="outline-info"
               onClick={() => dispatch(closeTicket(tId))}
-              disabled={selectedTicket.status === "Closed"}
+              disabled={selectedTicket.status === "En traitement"}
             >
-              Fermer le ticket
+              Commencer la resolution
             </Button>
           </Col>
         </Row>

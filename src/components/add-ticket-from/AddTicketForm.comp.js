@@ -14,11 +14,10 @@ import PropTypes from "prop-types";
 import { shortText } from "../../utils/validation";
 import "./add-ticket-form.style.css";
 import { useDispatch, useSelector } from "react-redux";
-import { openNewTicket } from "./add-ticketAction";
-import { restSuccessMSg } from "./add-ticketSlicer";
+import { addNewClient } from "../../pages/dashboard/userAction";
+import { restSuccessMSg } from "../../pages/dashboard/userSlice";
 const initialFrmDt = {
-  subject: "",
-  issueDate: "",
+  name: "",
   message: "",
 };
 const initialFrmError = {
@@ -31,23 +30,9 @@ export const AddTicketForm = () => {
   const [frmData, setFrmData] = useState(initialFrmDt);
   const [frmDataError, setFrmDataError] = useState(initialFrmError);
   const [cmbvalue, setcmbValue] = useState("Selectioner");
-
+  let RealSuccessMss = "Utilisateur Ajouté avec succéss";
   const dispatch = useDispatch();
-  useEffect(() => {
-    successMsg && dispatch(restSuccessMSg());
-  }, [dispatch, frmData, frmDataError]);
-
-  const { isLoading, error, successMsg } = useSelector(
-    (state) => state.openTicket
-  );
-  const {
-    user: { name },
-  } = useSelector((state) => state.user);
-
-  const handleSelect = (e) => {
-    console.log(e);
-    setcmbValue(e);
-  };
+  let successMsg = true;
   const handleOnChange = (e) => {
     const { name, value } = e.target;
 
@@ -59,36 +44,35 @@ export const AddTicketForm = () => {
   };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+
     setFrmDataError(initialFrmError);
-    const isSubjectValid = await shortText(frmData.subject);
 
     setFrmDataError({
       ...initialFrmError,
-      subject: !isSubjectValid,
     });
-    dispatch(openNewTicket({ ...frmData, sender: name, priority: cmbvalue }));
+
+    dispatch(addNewClient({ ...frmData }));
+
     //console.log("Form submit request received", frmData);
   };
 
   return (
     <Jumbotron style={{ background: "none" }} className="mt-3 add-new-ticket">
-      <h1 className="text-center">Ajouter un Nouveau Ticket</h1>
+      <h1 className="text-center">Ajouter un Nouveau Client</h1>
       <hr style={{ backgroundColor: "orangered" }} />
       <div>
-        {error && <Alert variant="danger">{error}</Alert>}
-        {successMsg && <Alert variant="primary">{successMsg}</Alert>}
-        {isLoading && <Spinner variant="primary" animation="border" />}
+        {successMsg && <Alert variant="primary"> {RealSuccessMss}</Alert>}
       </div>
       <Form autoComplete="off" onSubmit={handleOnSubmit}>
         <Form.Group>
-          <Form.Label>Sujet</Form.Label>
+          <Form.Label>Nom complet</Form.Label>
           <Form.Control
-            name="subject"
-            value={frmData.subject}
+            name="name"
+            value={frmData.name}
             onChange={handleOnChange}
             minLength="3"
             maxLength="50"
-            placeholder="Entrez le sujet de votre reclamation"
+            placeholder="..."
             required
           />
           <Form.Text className="text-danger">
@@ -96,57 +80,58 @@ export const AddTicketForm = () => {
           </Form.Text>
         </Form.Group>
         <Form.Group>
-          <Form.Label>Date de l'incident</Form.Label>
+          <Form.Label>Nom de l'entreprise</Form.Label>
           <Form.Control
-            type="date"
-            name="issueDate"
-            placeholder="jj-mm-aaaa"
-            value={frmData.issueDate}
+            name="company"
+            value={frmData.company}
             onChange={handleOnChange}
+            placeholder="..."
             required
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Les details</Form.Label>
+          <Form.Label>Addresse</Form.Label>
           <Form.Control
-            as="textarea"
-            name="message"
-            value={frmData.message}
+            name="address"
+            value={frmData.address}
             onChange={handleOnChange}
-            placeholder="Decrivez votre Problème "
+            placeholder="..."
+            required
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Telephone</Form.Label>
+          <Form.Control
+            name="phone"
+            value={frmData.phone}
+            onChange={handleOnChange}
+            placeholder="..."
+            required
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>email</Form.Label>
+          <Form.Control
+            name="email"
+            value={frmData.email}
+            onChange={handleOnChange}
+            placeholder="..."
+            required
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Mot de passe</Form.Label>
+          <Form.Control
+            name="password"
+            value={frmData.password}
+            onChange={handleOnChange}
+            placeholder="..."
             required
           />
         </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Priorité</Form.Label>
-          <DropdownButton
-            alignRight
-            title={cmbvalue}
-            value={cmbvalue}
-            id="dropdown-menu-align-right"
-            onSelect={handleSelect}
-            required
-          >
-            <Dropdown.Item style={{ backgroundColor: "red" }} eventKey="Elevée">
-              Elevée
-            </Dropdown.Item>
-            <Dropdown.Item
-              style={{ backgroundColor: "orange" }}
-              eventKey="Moyenne"
-            >
-              Moyenne
-            </Dropdown.Item>
-            <Dropdown.Item
-              style={{ backgroundColor: "green" }}
-              eventKey="Basse"
-            >
-              Basse
-            </Dropdown.Item>
-          </DropdownButton>
-        </Form.Group>
         <Button type="submit" variant="info">
-          Envoyer
+          Ajouter
         </Button>
       </Form>
     </Jumbotron>

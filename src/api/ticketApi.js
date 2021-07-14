@@ -2,8 +2,25 @@ import axios from "axios";
 
 const rootUrl = "http://localhost:3001/v1/";
 const ticketUlr = rootUrl + "ticket/";
-const closeTicketUrl = rootUrl + "ticket/close-ticket/";
+const updateTicketUrl = rootUrl + "ticket/treat-ticket/";
+export const getAllTickets = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result = await axios.get(
+        "http://localhost:3001/v1/ticket/AllTickets",
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+          },
+        }
+      );
 
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 export const getLowPriorityTickets = () => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -90,7 +107,7 @@ export const updateTicketStatusClosed = (_id) => {
   return new Promise(async (resolve, reject) => {
     try {
       const result = await axios.patch(
-        closeTicketUrl + _id,
+        updateTicketUrl + _id,
         {},
         {
           headers: {

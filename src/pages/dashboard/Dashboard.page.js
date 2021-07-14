@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Button, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllTickets } from "../../pages/ticket-lists/ticketsAction";
+import { fetchAllTheTickets } from "../../pages/ticket-lists/ticketsAction";
 import { TicketTable } from "../../components/Ticket-table/TicketTable.comp";
 //import tickets from "../../assets/data/dummy-tickets.json";
 import "./DashboardStyling.css";
@@ -14,7 +14,7 @@ export const Dashboard = () => {
   };
   const [str, setStr] = useState("");
   useEffect(() => {
-    dispatch(fetchAllTickets());
+    dispatch(fetchAllTheTickets());
   }, [str, dispatch]);
   const { tickets } = useSelector((state) => state.tickets);
   const pendingtickets = tickets.filter((row) => row.status !== "Fermer");

@@ -1,8 +1,10 @@
 import axios from "axios";
 
 const rootUrl = "http://localhost:3001/v1/";
+const ClientRootUrl = "http://localhost:3001/v1/user";
 const loginUrl = rootUrl + "admin/login";
 const userProfileUrl = rootUrl + "admin";
+const userAddingProfileUrl = ClientRootUrl + "/UserAddedFromAdmin";
 const logoutUrl = rootUrl + "admin/logout";
 const newAccessJWT = rootUrl + "tokens";
 const userVerificationUrl = userProfileUrl + "/verify";
@@ -10,7 +12,7 @@ const userVerificationUrl = userProfileUrl + "/verify";
 export const userRegistration = (frmData) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const res = await axios.post(userProfileUrl, frmData);
+      const res = await axios.post(userAddingProfileUrl, frmData);
 
       resolve(res.data);
 

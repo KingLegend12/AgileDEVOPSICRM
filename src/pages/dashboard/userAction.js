@@ -1,5 +1,12 @@
-import { getUserPending, getUserSuccess, getUserFail } from "./userSlice";
-import { fetchUser } from "../../api/userApi";
+import {
+  getUserPending,
+  getUserSuccess,
+  getUserFail,
+  AddUserFail,
+  AddUserPending,
+  AddUserSuccess,
+} from "./userSlice";
+import { fetchUser, userRegistration } from "../../api/userApi";
 
 export const getUserProfile = () => async (dispatch) => {
   try {
@@ -13,5 +20,19 @@ export const getUserProfile = () => async (dispatch) => {
     dispatch(getUserFail("User is not found"));
   } catch (error) {
     dispatch(getUserFail(error));
+  }
+};
+
+export const addNewClient = (frmData) => async (dispatch) => {
+  try {
+    dispatch(AddUserPending());
+
+    const result = await userRegistration(frmData);
+
+    return dispatch(AddUserSuccess("Utilisateur Ajouté avec success"));
+
+    return dispatch(AddUserFail("User is not found"));
+  } catch (error) {
+    return dispatch(AddUserFail(error));
   }
 };

@@ -2,11 +2,14 @@ import React from "react";
 import { BoxLoading, WindMillLoading } from "react-loadingg";
 import { Table, Container, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import BootstrapTable from "react-bootstrap-table-next";
 import { Link } from "react-router-dom";
 export const TicketTable = () => {
   const { searchTicketList, isLoading, error } = useSelector(
     (state) => state.tickets
   );
+  const data = searchTicketList;
   if (isLoading)
     return (
       <div>
@@ -24,11 +27,43 @@ export const TicketTable = () => {
     );
 
   if (error) return <h3>{error}</h3>;
-
+  const columns = [
+    {
+      dataField: "_id",
+      text: "Identifiant du ticket",
+    },
+    {
+      dataField: "subject",
+      text: "Sujet",
+      formatter: (cell, row, rowIndex, extraData) => (
+        <Link to={`/ticket/${row._id}`}>{row.subject}</Link>
+      ),
+    },
+    { dataField: "status", text: "Status" },
+    {
+      dataField: "priority",
+      text: "Priorité",
+      style: (cell, row, rowIndex, colIndex) => {
+        if (cell === "Elevée") {
+          return {
+            backgroundColor: "red",
+          };
+        } else if (cell === "Moyenne") {
+          return {
+            backgroundColor: "orange",
+          };
+        }
+        return {
+          backgroundColor: "green",
+        };
+      },
+    },
+    { dataField: "openAt", text: "Date d'ouverture" },
+  ];
   return (
     <>
       <Container>
-        <Table className="table table-striped table-dark">
+        {/*<Table className="table table-striped table-dark">
           <thead>
             <tr>
               <th>Identifiant du ticket</th>
@@ -70,7 +105,26 @@ export const TicketTable = () => {
               </tr>
             )}
           </tbody>
-        </Table>
+        </Table> */}
+        {searchTicketList.length ? (
+          <BootstrapTable
+            classes="table table-striped table-dark"
+            hover
+            keyField="id"
+            data={data}
+            columns={columns}
+            responsive
+            pagination={paginationFactory()}
+          />
+        ) : (
+          <Table className="table table-striped table-dark">
+            <tr>
+              <td colSpan="5" className="text-center">
+                Vous n'avez auncun ticket de reclamation en cours{""}
+              </td>
+            </tr>
+          </Table>
+        )}
       </Container>
     </>
   );
