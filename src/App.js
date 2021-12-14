@@ -14,6 +14,7 @@ import { Registration } from "./pages/registration/Registration.page";
 import { UserVerification } from "./pages/verification/UserVerification.page";
 import { CustomerLists } from "./pages/customer/customerList";
 import UpdatePasswordForm from "./password-reset/UpdatePasswordForm.comp";
+import { Customer } from "./pages/customerpage/customer.page";
 function App() {
   return (
     <div className="App">
@@ -48,6 +49,9 @@ function App() {
           </PrivateRoute>
           <PrivateRoute path="/P-Etickets">
             <HPTicketLists />
+          </PrivateRoute>
+          <PrivateRoute path="/client/:cId">
+            <Customer />
           </PrivateRoute>
           <Route path="/ticket/:tId">
             <Ticket />

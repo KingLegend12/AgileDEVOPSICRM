@@ -5,9 +5,12 @@ import {
   fetchCustomerSuccess,
   fetchCustomerFail,
   searchCustomers,
+  fetchSingleCustomerLoading,
+  fetchSingleCustomerSuccess,
+  fetchSingleCustomerFail,
 } from "./customerSlice";
 
-import { getAllUsers } from "../../api/userApi";
+import { getAllUsers, getUserbyID } from "../../api/userApi";
 export const fetchAllCustomers = () => async (dispatch) => {
   dispatch(fetchCustomerLoading());
 
@@ -20,6 +23,21 @@ export const fetchAllCustomers = () => async (dispatch) => {
     console.log(result);
   } catch (error) {
     dispatch(fetchCustomerFail(error.message));
+  }
+};
+export const fetchCustomerByID = (_id) => async (dispatch) => {
+  dispatch(fetchSingleCustomerLoading());
+
+  try {
+    const result = await getUserbyID(_id);
+    console.log(result);
+    dispatch(fetchSingleCustomerSuccess(result.data.result));
+    if (!result.data.result) {
+      dispatch(fetchSingleCustomerFail({ message: "error couldn't load" }));
+    }
+    console.log(result);
+  } catch (error) {
+    dispatch(fetchSingleCustomerFail(error.message));
   }
 };
 

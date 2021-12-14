@@ -23,7 +23,7 @@ export const LoginForm = ({ frmSwitcher }) => {
     sessionStorage.getItem("accessJWT") && history.push("/dashboard");
   }, [history]);
   const [email, setEmail] = useState("d.jaidi@aui.ma");
-  const [password, setPassword] = useState("admin123");
+  const [password, setPassword] = useState("sfsd#3Dsga");
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;

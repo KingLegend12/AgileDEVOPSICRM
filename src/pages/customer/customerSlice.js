@@ -31,6 +31,18 @@ const customerListSlice = createSlice({
         return row.name.toLowerCase().includes(payload.toLowerCase());
       });
     },
+    fetchSingleCustomerLoading: (state) => {
+      state.isLoading = true;
+    },
+    fetchSingleCustomerSuccess: (state, { payload }) => {
+      state.selectedCustomer = payload;
+      state.isLoading = false;
+      state.error = "";
+    },
+    fetchSingleCustomerFail: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
   },
 });
 
@@ -41,6 +53,9 @@ export const {
   fetchCustomerSuccess,
   fetchCustomerFail,
   searchCustomers,
+  fetchSingleCustomerFail,
+  fetchSingleCustomerSuccess,
+  fetchSingleCustomerLoading,
 } = actions;
 
 export default reducer;

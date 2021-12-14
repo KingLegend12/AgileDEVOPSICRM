@@ -92,6 +92,25 @@ export const getAllUsers = () => {
     }
   });
 };
+
+export const getUserbyID = (_id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result = await axios.get(
+        "http://localhost:3001/v1/admin/client/" + _id,
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+          },
+        }
+      );
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 export const fetchUser = () => {
   return new Promise(async (resolve, reject) => {
     try {

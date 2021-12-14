@@ -36,7 +36,7 @@ export const CustomerTable = () => {
       dataField: "name",
       text: "Nom du client",
       formatter: (cell, row, rowIndex, extraData) => (
-        <Link to={`/ticket/${row._id}`}>{row.name}</Link>
+        <Link to={`/client/${row._id}`}>{row.name}</Link>
       ),
     },
     {
