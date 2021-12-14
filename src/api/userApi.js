@@ -2,6 +2,7 @@ import axios from "axios";
 
 const rootUrl = "http://localhost:3001/v1/";
 const ClientRootUrl = "http://localhost:3001/v1/user";
+const AdminRootUrl = "http://localhost:3001/v1/admin";
 const loginUrl = rootUrl + "admin/login";
 const userProfileUrl = rootUrl + "admin";
 const userAddingProfileUrl = ClientRootUrl + "/UserAddedFromAdmin";
@@ -13,6 +14,21 @@ export const userRegistration = (frmData) => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.post(userAddingProfileUrl, frmData);
+
+      resolve(res.data);
+
+      if (res.data.status === "success") {
+        resolve(res.data);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+export const AdminRegistration = (frmData) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.post(AdminRootUrl, frmData);
 
       resolve(res.data);
 
@@ -58,7 +74,24 @@ export const userLogin = (frmData) => {
     }
   });
 };
+export const getAllUsers = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result = await axios.get(
+        "http://localhost:3001/v1/admin/allUsers",
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+          },
+        }
+      );
 
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 export const fetchUser = () => {
   return new Promise(async (resolve, reject) => {
     try {

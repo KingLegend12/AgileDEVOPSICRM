@@ -8,15 +8,18 @@ import {
   Spinner,
   Alert,
 } from "react-bootstrap";
-import { newUserRegistration } from "./userRegAction";
+import { newAdminRegistration } from "./userRegAction";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 
 const initialState = {
-  name: "Driss Jaidi",
+  name: "Donald Trump",
   phone: "0611111111",
-  email: "fakeemail@email.com",
+  email: "fakeemail2@email.com",
   company: "Mac Code",
   address: "Texas",
+
   password: "sfsd#3Dsg",
   confirmPass: "sfsd#3Dsg",
 };
@@ -33,7 +36,8 @@ const RegistrationForm = () => {
   const dispatch = useDispatch();
   const [newUser, setNewUser] = useState(initialState);
   const [passwordError, setPasswordError] = useState(passVerificationError);
-
+  const [typevalue, settypeValue] = useState("Selectioner");
+  const [typevalue1, settypeValue1] = useState("Selectioner");
   const { isLoading, status, message } = useSelector(
     (state) => state.registration
   );
@@ -69,7 +73,14 @@ const RegistrationForm = () => {
       });
     }
   };
-
+  const handleSelect2 = (e) => {
+    console.log(e);
+    settypeValue(e);
+  };
+  const handleSelect3 = (e) => {
+    console.log(e);
+    settypeValue1(e);
+  };
   const handleOnSubmit = (e) => {
     e.preventDefault();
     // console.log(newUser);
@@ -82,8 +93,10 @@ const RegistrationForm = () => {
       company,
       address,
       password,
+      speciality: typevalue,
+      etape: typevalue1,
     };
-    dispatch(newUserRegistration(newRegistration));
+    dispatch(newAdminRegistration(newRegistration));
   };
 
   return (
@@ -166,7 +179,42 @@ const RegistrationForm = () => {
                 required
               />
             </Form.Group>
+            <Form.Group>
+              <Form.Label>specialite</Form.Label>
 
+              <DropdownButton
+                alignRight
+                title={typevalue}
+                value={typevalue}
+                id="dropdown-menu-align-right"
+                onSelect={handleSelect2}
+                required
+              >
+                <Dropdown.Item eventKey="Pedagogique">
+                  Pedagogique
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="Technique">Technique</Dropdown.Item>
+                <Dropdown.Item eventKey="Réseau">Réseau</Dropdown.Item>
+              </DropdownButton>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Etape</Form.Label>
+
+              <DropdownButton
+                alignRight
+                title={typevalue1}
+                value={typevalue1}
+                id="dropdown-menu-align-right"
+                onSelect={handleSelect3}
+                required
+              >
+                <Dropdown.Item eventKey="En attente de la reponse de l'operateur">
+                  En attente de la reponse de l'operateur
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="Traitement">Traitement</Dropdown.Item>
+                <Dropdown.Item eventKey="Fermer">Fermer</Dropdown.Item>
+              </DropdownButton>
+            </Form.Group>
             <Form.Group>
               <Form.Label>Mot de passe</Form.Label>
               <Form.Control

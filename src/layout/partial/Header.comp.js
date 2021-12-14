@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
-import logo from "../../assets/img/ONEE.jpeg";
+import logo from "../../assets/img/dev.png";
 import "./FooterButtons.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +22,7 @@ export const Header = () => {
       <Navbar.Brand>
         <img src={logo} alt="logo" width="65px" />
       </Navbar.Brand>
+
       <h3
         style={{
           "text-shadow":
@@ -30,6 +31,15 @@ export const Header = () => {
       >
         Bienvenue Admin {user.name}
       </h3>
+      <h3
+        style={{
+          "text-shadow":
+            "0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px orangered, 0 0 80px orangered, 0 0 90px orangered, 0 0 100px orangered, 0 0 150px orangered",
+          "margin-left": "20px",
+        }}
+      >
+        Specialité: {user.speciality}
+      </h3>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
@@ -37,6 +47,13 @@ export const Header = () => {
             <Nav.Link>
               <Button variant="outline-light" size="lg" className="HeaderBTN">
                 L'interface
+              </Button>
+            </Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/Allclients">
+            <Nav.Link>
+              <Button variant="outline-light" size="lg" className="HeaderBTN">
+                Les clients
               </Button>
             </Nav.Link>
           </LinkContainer>

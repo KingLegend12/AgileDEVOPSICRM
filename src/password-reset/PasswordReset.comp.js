@@ -41,6 +41,11 @@ export const ResetPassword = ({
           </a>
         </Col>
       </Row>
+      <Row>
+        <Col>
+          <a href="resetpasswordform">Testing Forgot pass interface</a>
+        </Col>
+      </Row>
     </Container>
   );
 };

@@ -12,6 +12,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { PrivateRoute } from "./components/private-route/PrivateRoute.comp";
 import { Registration } from "./pages/registration/Registration.page";
 import { UserVerification } from "./pages/verification/UserVerification.page";
+import { CustomerLists } from "./pages/customer/customerList";
+import UpdatePasswordForm from "./password-reset/UpdatePasswordForm.comp";
 function App() {
   return (
     <div className="App">
@@ -19,6 +21,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Entry />
+          </Route>
+          <Route exact path="/resetpasswordform">
+            <UpdatePasswordForm />
           </Route>
           <Route exact path="/registration">
             <Registration />
@@ -28,6 +33,9 @@ function App() {
           </Route>
           <PrivateRoute path="/dashboard">
             <Dashboard />
+          </PrivateRoute>
+          <PrivateRoute path="/Allclients">
+            <CustomerLists />
           </PrivateRoute>
           <PrivateRoute path="/add-ticket">
             <AddTicketPage />

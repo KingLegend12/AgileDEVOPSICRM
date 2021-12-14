@@ -22,9 +22,11 @@ import {
   getSingleTicket,
   updateReplyTicket,
   updateTicketStatusClosed,
+  updateTicketStatusClosure,
   getHighPriorityTickets,
   getMedPriorityTickets,
   getAllTickets,
+  updateTicketStatusFinalClose,
 } from "../../api/ticketApi";
 export const fetchAllTheTickets = () => async (dispatch) => {
   dispatch(fetchTicketLoading());
@@ -133,7 +135,40 @@ export const closeTicket = (_id) => async (dispatch) => {
 
     dispatch(fetchSingleTicket(_id));
 
+    dispatch(closeTicketSuccess("Ce ticket est en traitement"));
+  } catch (error) {
+    console.log(error.message);
+    dispatch(closeTicketFail(error.message));
+  }
+};
+export const FinalcloseTicket = (_id) => async (dispatch) => {
+  dispatch(closeTicketLoading());
+  try {
+    const result = await updateTicketStatusFinalClose(_id);
+    if (result.status === "error") {
+      return dispatch(closeTicketFail(result.message));
+    }
+
+    dispatch(fetchSingleTicket(_id));
+
     dispatch(closeTicketSuccess("Ce ticket est fermé"));
+  } catch (error) {
+    console.log(error.message);
+    dispatch(closeTicketFail(error.message));
+  }
+};
+
+export const closureTicket = (_id) => async (dispatch) => {
+  dispatch(closeTicketLoading());
+  try {
+    const result = await updateTicketStatusClosure(_id);
+    if (result.status === "error") {
+      return dispatch(closeTicketFail(result.message));
+    }
+
+    dispatch(fetchSingleTicket(_id));
+
+    dispatch(closeTicketSuccess("Ce ticket est en fermeture"));
   } catch (error) {
     console.log(error.message);
     dispatch(closeTicketFail(error.message));

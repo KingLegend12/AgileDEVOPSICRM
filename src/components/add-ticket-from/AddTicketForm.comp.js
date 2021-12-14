@@ -32,7 +32,7 @@ export const AddTicketForm = () => {
   const [cmbvalue, setcmbValue] = useState("Selectioner");
   let RealSuccessMss = "Utilisateur Ajouté avec succéss";
   const dispatch = useDispatch();
-  let successMsg = true;
+  var successMsg = false;
   const handleOnChange = (e) => {
     const { name, value } = e.target;
 
@@ -50,7 +50,7 @@ export const AddTicketForm = () => {
     setFrmDataError({
       ...initialFrmError,
     });
-
+    successMsg = true;
     dispatch(addNewClient({ ...frmData }));
 
     //console.log("Form submit request received", frmData);

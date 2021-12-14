@@ -7,11 +7,13 @@ import { TicketTable } from "../../components/Ticket-table/TicketTable.comp";
 import "./DashboardStyling.css";
 import { PageBreadcrumb } from "../../components/breadcrumb/Breadcrumb.comp";
 import { Link } from "react-router-dom";
+import { fetchUser } from "../../api/userApi";
 export const Dashboard = () => {
   const dispatch = useDispatch();
   const refreshPage = () => {
     window.location.reload();
   };
+  const { user } = useSelector((state) => state.user);
   const [str, setStr] = useState("");
   useEffect(() => {
     dispatch(fetchAllTheTickets());
@@ -26,6 +28,12 @@ export const Dashboard = () => {
       <Row>
         <Col>
           <PageBreadcrumb page="Dashboard" />
+        </Col>
+      </Row>
+      <Row>
+        <Col style={{ color: "black" }}>
+          {" "}
+          <h3> Role: {user.etape} </h3>
         </Col>
       </Row>
       <Row>

@@ -3,6 +3,9 @@ import axios from "axios";
 const rootUrl = "http://localhost:3001/v1/";
 const ticketUlr = rootUrl + "ticket/";
 const updateTicketUrl = rootUrl + "ticket/treat-ticket/";
+const closeTicketUrl = rootUrl + "ticket/admin_FinalClose-ticket/";
+
+const updateClosureTicketUrl = rootUrl + "ticket/admin_close-ticket/";
 export const getAllTickets = () => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -108,6 +111,47 @@ export const updateTicketStatusClosed = (_id) => {
     try {
       const result = await axios.patch(
         updateTicketUrl + _id,
+        {},
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+          },
+        }
+      );
+
+      resolve(result.data);
+    } catch (error) {
+      console.log(error.message);
+      reject(error);
+    }
+  });
+};
+export const updateTicketStatusFinalClose = (_id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result = await axios.patch(
+        closeTicketUrl + _id,
+        {},
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+          },
+        }
+      );
+
+      resolve(result.data);
+    } catch (error) {
+      console.log(error.message);
+      reject(error);
+    }
+  });
+};
+
+export const updateTicketStatusClosure = (_id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result = await axios.patch(
+        updateClosureTicketUrl + _id,
         {},
         {
           headers: {

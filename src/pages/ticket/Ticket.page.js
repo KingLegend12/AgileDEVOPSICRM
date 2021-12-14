@@ -5,7 +5,12 @@ import tickets from "../../assets/data/dummy-tickets.json";
 import { MessageHistory } from "../../components/message-history/MessageHistory.comp";
 import { UpdateTicket } from "../../components/update-ticket/UpdateTicket.comp";
 import { useParams } from "react-router-dom";
-import { fetchSingleTicket, closeTicket } from "../ticket-lists/ticketsAction";
+import {
+  fetchSingleTicket,
+  closeTicket,
+  closureTicket,
+  FinalcloseTicket,
+} from "../ticket-lists/ticketsAction";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "../../pages/dashboard/userAction";
 import { Header } from "../../layout/partial/Header.comp";
@@ -22,6 +27,7 @@ export const Ticket = () => {
     replyMsg,
     replyTicketError,
   } = useSelector((state) => state.tickets);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchSingleTicket(tId));
@@ -55,16 +61,30 @@ export const Ticket = () => {
             {replyTicketError && (
               <Alert variant="danger">{replyTicketError}</Alert>
             )}
-            {replyMsg && (
-              <Alert variant="success">
-                Ce ticket est en cours de Traitement
-              </Alert>
+            {replyMsg &&
+              user.etape == "En attente de la reponse de l'operateur" && (
+                <Alert variant="success">
+                  Ce ticket est en cours de Traitement
+                </Alert>
+              )}
+            {replyMsg && user.etape == "Traitement" && (
+              <Alert variant="success">Ce ticket est en Traitement</Alert>
+            )}
+            {replyMsg && user.etape == "Fermeture" && (
+              <Alert variant="success">Ce ticket est fermé</Alert>
             )}
           </Col>
         </Row>
         <Row>
-          {tId}
-          <Col>
+          Identifiant : {tId}
+          <Col
+            style={{
+              backgroundColor: "orange",
+              borderRadius: "2rem",
+              opacity: "0.8",
+              boxShadow: "0px 0px 9px cyan",
+            }}
+          >
             <div className="subject">Sujet: {selectedTicket.subject}</div>
             <div className="date">
               Date de reclammation:{" "}
@@ -72,16 +92,39 @@ export const Ticket = () => {
                 new Date(selectedTicket.openAt).toLocaleString()}
             </div>
             <div className="status">Status: {selectedTicket.status}</div>
-            <div className="priority">Priorite {selectedTicket.priority}</div>
+            <div className="priority">Priorite: {selectedTicket.priority}</div>
           </Col>
           <Col className="text-right">
-            <Button
-              variant="outline-info"
-              onClick={() => dispatch(closeTicket(tId))}
-              disabled={selectedTicket.status === "En traitement"}
-            >
-              Commencer la resolution
-            </Button>
+            {selectedTicket.status ==
+              "En attente de la reponse de l'operateur" &&
+              user.etape == "En attente de la reponse de l'operateur" && (
+                <Button
+                  variant="outline-info"
+                  onClick={() => dispatch(closeTicket(tId))}
+                  disabled={selectedTicket.status === "Traitement"}
+                >
+                  Commencer la resolution
+                </Button>
+              )}{" "}
+            {selectedTicket.status == "Traitement" &&
+              user.etape == "Traitement" && (
+                <Button
+                  variant="outline-info"
+                  onClick={() => dispatch(closureTicket(tId))}
+                  disabled={selectedTicket.status === "Fermeture"}
+                >
+                  Fermer le ticket
+                </Button>
+              )}
+            {selectedTicket.status == "Fermeture" && user.etape == "Fermeture" && (
+              <Button
+                variant="outline-info"
+                onClick={() => dispatch(FinalcloseTicket(tId))}
+                disabled={selectedTicket.status === "Fermer"}
+              >
+                Fermer le ticket
+              </Button>
+            )}
           </Col>
         </Row>
         <Row className="mt-4">
