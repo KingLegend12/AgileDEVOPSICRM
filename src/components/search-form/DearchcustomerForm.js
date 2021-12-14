@@ -25,7 +25,7 @@ export const SearchClientForm = () => {
           <Col sm="9">
             <Form.Control
               name="searchStr"
-              onChange={handleOnChange}
+              onChange={handleOnChange} //helloooo
               placeholder="Rechercher ..."
             ></Form.Control>
           </Col>
