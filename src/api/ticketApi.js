@@ -101,11 +101,15 @@ export const getSingleTicket = (_id) => {
 export const updateReplyTicket = (_id, msgObj) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await axios.put(ticketUlr + "admin/" + _id, msgObj, {
-        headers: {
-          Authorization: sessionStorage.getItem("accessJWT"),
-        },
-      });
+      const result = await axios.put(
+        "https://devagileicrm.herokuapp.com/v1/ticket/admin/" + _id,
+        msgObj,
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+          },
+        }
+      );
 
       resolve(result.data);
     } catch (error) {
