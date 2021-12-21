@@ -46,6 +46,7 @@ export const Ticket = () => {
   return (
     <>
       {" "}
+      <Header />
       <Container>
         <hr />
         <Row>

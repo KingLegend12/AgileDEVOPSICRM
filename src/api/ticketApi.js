@@ -81,11 +81,14 @@ export const getHighPriorityTickets = () => {
 export const getSingleTicket = (_id) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await axios.get(ticketUlr + _id, {
-        headers: {
-          Authorization: sessionStorage.getItem("accessJWT"),
-        },
-      });
+      const result = await axios.get(
+        "https://devagileicrm.herokuapp.com/v1/ticket/admin/" + _id,
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+          },
+        }
+      );
 
       resolve(result);
     } catch (error) {
