@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const rootUrl = "http://localhost:3001/v1/";
-const ClientRootUrl = "http://localhost:3001/v1/user";
-const AdminRootUrl = "http://localhost:3001/v1/admin";
+const rootUrl = "https://devagileicrm.herokuapp.com/v1/";
+const ClientRootUrl = "https://devagileicrm.herokuapp.com/v1/user";
+const AdminRootUrl = "https://devagileicrm.herokuapp.com/v1/admin";
 const loginUrl = rootUrl + "admin/login";
 const userProfileUrl = rootUrl + "admin";
 const userAddingProfileUrl = ClientRootUrl + "/UserAddedFromAdmin";
@@ -78,7 +78,7 @@ export const getAllUsers = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const result = await axios.get(
-        "http://localhost:3001/v1/admin/allUsers",
+        "https://devagileicrm.herokuapp.com/v1/admin/allUsers",
         {
           headers: {
             Authorization: sessionStorage.getItem("accessJWT"),
@@ -97,7 +97,7 @@ export const getUserbyID = (_id) => {
   return new Promise(async (resolve, reject) => {
     try {
       const result = await axios.get(
-        "http://localhost:3001/v1/admin/client/" + _id,
+        "https://devagileicrm.herokuapp.com/v1/admin/client/" + _id,
         {
           headers: {
             Authorization: sessionStorage.getItem("accessJWT"),

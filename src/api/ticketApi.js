@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const rootUrl = "http://localhost:3001/v1/";
+const rootUrl = "hhttps://devagileicrm.herokuapp.com/v1/";
 const ticketUlr = rootUrl + "ticket/";
 const updateTicketUrl = rootUrl + "ticket/treat-ticket/";
 const closeTicketUrl = rootUrl + "ticket/admin_FinalClose-ticket/";
@@ -10,7 +10,7 @@ export const getAllTickets = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const result = await axios.get(
-        "http://localhost:3001/v1/ticket/AllTickets",
+        "https://devagileicrm.herokuapp.com/v1/ticket/AllTickets",
         {
           headers: {
             Authorization: sessionStorage.getItem("accessJWT"),
@@ -27,11 +27,14 @@ export const getAllTickets = () => {
 export const getLowPriorityTickets = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await axios.get("http://localhost:3001/v1/ticket/basse", {
-        headers: {
-          Authorization: sessionStorage.getItem("accessJWT"),
-        },
-      });
+      const result = await axios.get(
+        "https://devagileicrm.herokuapp.com/v1/ticket/basse",
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+          },
+        }
+      );
 
       resolve(result);
     } catch (error) {
@@ -43,7 +46,7 @@ export const getMedPriorityTickets = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const result = await axios.get(
-        "http://localhost:3001/v1/ticket/moyenne",
+        "https://devagileicrm.herokuapp.com/v1/ticket/moyenne",
         {
           headers: {
             Authorization: sessionStorage.getItem("accessJWT"),
@@ -60,11 +63,14 @@ export const getMedPriorityTickets = () => {
 export const getHighPriorityTickets = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await axios.get("http://localhost:3001/v1/ticket/elevee", {
-        headers: {
-          Authorization: sessionStorage.getItem("accessJWT"),
-        },
-      });
+      const result = await axios.get(
+        "https://devagileicrm.herokuapp.com/v1/ticket/elevee",
+        {
+          headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+          },
+        }
+      );
 
       resolve(result);
     } catch (error) {

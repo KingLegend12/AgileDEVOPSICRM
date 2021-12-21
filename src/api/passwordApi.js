@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const rootUrl = "http://localhost:3001/v1/";
+//const rootUrl = "http://localhost:3001/v1/";
+const rootUrl = "https://devagileicrm.herokuapp.com/v1/";
 const otpReqUrl = rootUrl + "user/reset-password";
 const updatePassUrl = rootUrl + "user/reset-password";
 
