@@ -81,7 +81,7 @@ export const getHighPriorityTickets = () => {
 export const getSingleTicket = (_id) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const result = await axios.get(ticketUlr + "admin/" + _id, {
+      const result = await axios.get(ticketUlr + _id, {
         headers: {
           Authorization: sessionStorage.getItem("accessJWT"),
         },
