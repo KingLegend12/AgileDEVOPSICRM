@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const rootUrl = "hhttps://devagileicrm.herokuapp.com/v1/";
+const rootUrl = "https://devagileicrm.herokuapp.com/v1/";
 const ticketUlr = rootUrl + "ticket/";
 const updateTicketUrl = rootUrl + "ticket/treat-ticket/";
 const closeTicketUrl = rootUrl + "ticket/admin_FinalClose-ticket/";
