@@ -60,21 +60,21 @@ export const Header = () => {
           <LinkContainer to="/P-Btickets">
             <Nav.Link>
               <Button variant="outline-light" size="lg" className="HeaderBTN">
-                Les tickets P_B
+                tickets P_B
               </Button>
             </Nav.Link>
           </LinkContainer>
           <LinkContainer to="/P-Mtickets">
             <Nav.Link>
               <Button variant="outline-light" size="lg" className="HeaderBTN">
-                Les tickets P_M
+                tickets P_M
               </Button>
             </Nav.Link>
           </LinkContainer>
           <LinkContainer to="/P-Etickets">
             <Nav.Link>
               <Button variant="outline-light" size="lg" className="HeaderBTN">
-                Les tickets P_E
+                tickets P_E
               </Button>
             </Nav.Link>
           </LinkContainer>
